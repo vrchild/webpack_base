@@ -1,0 +1,23 @@
+npx webpack serve --config ./config/webpack.dev.js  开发环境项目运行 生产模式只需要运行
+npx webpack --config ./config/webpack.prod.js  打包输出 生产模式 只需要打包输出
+
+性能：(mini-css-extract-plugin)  css的兼容处理（const MiniCssExtractPlugin = require("mini-css-extract-plugin")）
+页面初始化，首先解析HTML代码，渲染结构，发现div下面什么样式都没有，因为还在解析js，而样式是解析js以后创建style标签以后插入到HTML里面的，突然一闪页面才出来
+解决： 单独打包css文件，link引入性能才更好
+
+
+高级：
+1.sourceMap
+    devtool: "cheap-module-source-map" // sourceMap 代码出错，方便更快的找到问题位置   只有行的映射
+    devtool: "source-map" // 行和列的映射
+2.HMR （开发模式，不支持js）热模块替换 在程序运行中，替换，添加，或者删除模块，而无需加载整个页面 提升打包构建速度
+3.OneOf（开发，生产都可以，每个文件只能被一个loader配置处理） 打包时每个文件都会经过loader处理，虽然test正则没有处理（匹配上的处理，还会继续匹配），但是要过一遍，比较慢
+4.include/exclude 只处理一些文件（不包含node-module等）
+5.cache 每次打包时js文件都要经过eslint检查和Babel编译，比较慢
+
+git:
+初始化 git init
+新建本地分支并切换 git checkout -b
+本地分支推送到远程仓库 git remote add webpack_lyf https://gitee.com/Vrchild/webpack.git
+
+
